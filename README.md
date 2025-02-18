@@ -1,115 +1,110 @@
-📌 Development Challenge - Formas Geométricas
+# 📌 Development Challenge - Formas Geométricas
 
-📖 Descripción del Proyecto
+## 📖 Descripción del Proyecto
 
-Este proyecto es una aplicación modular que genera reportes de formas geométricas en distintos idiomas, utilizando principios de Clean Architecture, SOLID y patrones de diseño. Está desarrollado en .NET Framework 4.6.2.
+Este proyecto es una aplicación modular que genera reportes de formas geométricas en distintos idiomas, utilizando principios de **Clean Architecture**, **SOLID** y patrones de diseño. Está desarrollado en **.NET Framework 4.6.2**.
 
-🚀 Arquitectura del Proyecto
+## 🚀 Arquitectura del Proyecto
 
-La solución sigue un enfoque de arquitectura en capas con los siguientes módulos:
+La solución sigue un enfoque de **arquitectura en capas** con los siguientes módulos:
 
-1️⃣ Core (Dominio)
+### **1️⃣ Core (Dominio)**
 
 Contiene la lógica de negocio principal:
 
-IFormaGeometrica.cs → Define la interfaz base para todas las formas geométricas.
+- `IFormaGeometrica.cs` → Define la interfaz base para todas las formas geométricas.
+- `FormaGeometrica.cs` → Clase abstracta base que implementa `IFormaGeometrica`.
+- Clases concretas de formas geométricas:
+  - `Cuadrado.cs`
+  - `Circulo.cs`
+  - `TrianguloEquilatero.cs`
+  - `Trapecio.cs`
+  - `TrapecioRectangulo.cs`
+  - `Rectangulo.cs`
 
-FormaGeometrica.cs → Clase abstracta base que implementa IFormaGeometrica.
+### **2️⃣ Application (Servicios y Negocio)**
 
-Clases concretas de formas geométricas:
+- `ReporteService.cs` → Servicio que genera reportes de formas en distintos idiomas.
 
-Cuadrado.cs
+### **3️⃣ Infrastructure (Soporte y Utilidades)**
 
-Circulo.cs
+- `TraduccionesHelper.cs` → Contiene diccionarios con traducciones en español, inglés e italiano.
 
-TrianguloEquilatero.cs
+### **4️⃣ Tests (Pruebas Unitarias)**
 
-Trapecio.cs
+- `DataTests.cs` → Pruebas unitarias que validan los reportes generados.
 
-TrapecioRectangulo.cs
+---
 
-Rectangulo.cs
+## 🔹 **Patrones de Diseño Implementados**
 
-2️⃣ Application (Servicios y Negocio)
+- **Strategy Pattern**: `IFormaGeometrica` permite definir estrategias para el cálculo de área y perímetro.
+- **Factory Pattern**: `ReporteService` usa `IFormaGeometrica` sin conocer implementaciones específicas.
+- **Singleton Pattern**: `TraduccionesHelper` mantiene un único diccionario global de traducciones.
+- **Open/Closed Principle (OCP - SOLID)**: Se pueden agregar nuevas formas geométricas sin modificar código existente.
 
-ReporteService.cs → Servicio que genera reportes de formas en distintos idiomas.
+---
 
-3️⃣ Infrastructure (Soporte y Utilidades)
+## 🔹 **Paradigmas de Programación Orientada a Objetos (POO) Utilizados**
 
-TraduccionesHelper.cs → Contiene diccionarios con traducciones en español, inglés e italiano.
+- **Abstracción**: `IFormaGeometrica` define métodos sin implementación concreta.
+- **Herencia**: `FormaGeometrica` es la base de `Cuadrado`, `Circulo`, `Trapecio`, `TrapecioRectangulo`, etc.
+- **Polimorfismo**: `ReporteService` opera con `IFormaGeometrica`, sin importar su tipo concreto.
+- **Encapsulamiento**: `TraduccionesHelper` protege los datos dentro de un diccionario estático.
 
-4️⃣ Tests (Pruebas Unitarias)
+---
 
-DataTests.cs → Pruebas unitarias que validan los reportes generados.
+## 🛠 **Pruebas Unitarias (Unit Tests)**
 
-🔹 Patrones de Diseño Implementados
+Se han implementado varios tests con **NUnit**:
 
-Strategy Pattern: IFormaGeometrica permite definir estrategias para el cálculo de área y perímetro.
+### **✔️ Tests de Lista Vacía**
 
-Factory Pattern: ReporteService usa IFormaGeometrica sin conocer implementaciones específicas.
+- `TestResumenListaVacia()`: Verifica que se genere el mensaje correcto para una lista vacía.
+- `TestResumenListaVaciaFormasEnIngles()`
+- `TestResumenListaVaciaFormasEnItaliano()`
 
-Singleton Pattern: TraduccionesHelper mantiene un único diccionario global de traducciones.
+### **✔️ Tests con una Sola Forma**
 
-Open/Closed Principle (OCP - SOLID): Se pueden agregar nuevas formas geométricas sin modificar código existente.
+- `TestResumenListaConUnCuadrado()`
+- `TestResumenListaConUnTrapecioRectangulo()`
 
-🔹 Paradigmas de Programación Orientada a Objetos (POO) Utilizados
+### **✔️ Tests con Múltiples Formas**
 
-Abstracción: IFormaGeometrica define métodos sin implementación concreta.
+- `TestResumenListaConMasCuadrados()`
+- `TestResumenListaConMasTipos()`
+- `TestResumenListaConTrapecioRectanguloYOtros()`
 
-Herencia: FormaGeometrica es la base de Cuadrado, Circulo, Trapecio, TrapecioRectangulo, etc.
+### **✔️ Tests con Traducciones en Italiano**
 
-Polimorfismo: ReporteService opera con IFormaGeometrica, sin importar su tipo concreto.
+- `TestResumenListaConMasCuadradosEnItaliano()`
+- `TestResumenListaConTrapecioYRectanguloEnItaliano()`
+- `TestResumenListaConTrapecioRectanguloEnItaliano()`
 
-Encapsulamiento: TraduccionesHelper protege los datos dentro de un diccionario estático.
+### **✔️ Test para Trapecio Rectángulo**
 
-🛠 Pruebas Unitarias (Unit Tests)
+- `TestResumenListaConTrapecioRectangulo()`: Prueba que un **Trapecio Rectángulo** de bases 6 y 4, altura 3 y lado inclinado 5 genere el reporte correcto con área = 15 y perímetro = 18.
 
-Se han implementado varios tests con NUnit:
+---
 
-✔️ Tests de Lista Vacía
+## 🎯 **Cómo Ejecutar el Proyecto**
 
-TestResumenListaVacia(): Verifica que se genere el mensaje correcto para una lista vacía.
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/DevelopmentChallenge.git
+   ```
+2. Abre el proyecto en **Visual Studio 2019+**.
+3. Compila y ejecuta los tests con **NUnit**.
 
-TestResumenListaVaciaFormasEnIngles()
+---
 
-TestResumenListaVaciaFormasEnItaliano()
-
-✔️ Tests con una Sola Forma
-
-TestResumenListaConUnCuadrado()
-
-TestResumenListaConUnTrapecioRectangulo()
-
-✔️ Tests con Múltiples Formas
-
-TestResumenListaConMasCuadrados()
-
-TestResumenListaConMasTipos()
-
-TestResumenListaConTrapecioRectanguloYOtros()
-
-✔️ Tests con Traducciones en Italiano
-
-TestResumenListaConMasCuadradosEnItaliano()
-
-TestResumenListaConTrapecioYRectanguloEnItaliano()
-
-TestResumenListaConTrapecioRectanguloEnItaliano()
-
-🎯 Cómo Ejecutar el Proyecto
-
-Clona el repositorio:
-
-git clone https://github.com/tu-usuario/DevelopmentChallenge.git
-
-Abre el proyecto en Visual Studio 2019+.
-
-Compila y ejecuta los tests con NUnit.
-
-📌 Conclusión
+## 📌 **Conclusión**
 
 Este proyecto ofrece una solución extensible y mantenible para el cálculo de áreas y perímetros de formas geométricas, con soporte multilingüe y pruebas unitarias para garantizar su correcto funcionamiento.
 
 🚀 ¡Listo para ser extendido con nuevas formas y funcionalidades! 🔥
 
-Att. Ry
+---
+
+## 📌 **Ry**
+
