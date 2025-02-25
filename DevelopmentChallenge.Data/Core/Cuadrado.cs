@@ -1,4 +1,5 @@
 ﻿using DevelopmentChallenge.Data.Infrastructure;
+using System.Globalization;
 
 namespace DevelopmentChallenge.Data.Core
 {
@@ -6,12 +7,9 @@ namespace DevelopmentChallenge.Data.Core
   {
     public Cuadrado(decimal lado) : base(lado) { }
 
-    public override string Nombre(int idioma, int cantidad)
+    public override string Nombre(CultureInfo culture, int cantidad)
     {
-      if (idioma == 3)
-        return cantidad == 1 ? "Quadrato" : "Quadrati";
-
-      return cantidad == 1 ? TraduccionesHelper.Traducciones[idioma]["Cuadrado"] : TraduccionesHelper.Traducciones[idioma]["Cuadrado"] + "s";
+      return ResourceHelper.ObtenerTextoPluralizado("Cuadrado", culture.TwoLetterISOLanguageName, cantidad);
     }
 
     public override decimal CalcularArea() => _lado * _lado;

@@ -1,4 +1,5 @@
 ﻿using DevelopmentChallenge.Data.Infrastructure;
+using System.Globalization;
 
 namespace DevelopmentChallenge.Data.Core
 {
@@ -18,13 +19,14 @@ namespace DevelopmentChallenge.Data.Core
       _ladoInclinado = ladoInclinado;
     }
 
-    public override string Nombre(int idioma, int cantidad)
+    public override string Nombre(CultureInfo culture, int cantidad)
     {
-      return cantidad == 1 ? TraduccionesHelper.Traducciones[idioma]["Trapecio"] : TraduccionesHelper.Traducciones[idioma]["Trapecio"] + "s";
+      return ResourceHelper.ObtenerTextoPluralizado("Trapecio", culture.TwoLetterISOLanguageName, cantidad);
     }
 
     public override decimal CalcularArea() => ((_baseMayor + _baseMenor) / 2) * _altura;
 
     public override decimal CalcularPerimetro() => _baseMayor + _baseMenor + _altura + _ladoInclinado;
+
   }
 }

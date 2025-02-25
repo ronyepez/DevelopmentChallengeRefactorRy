@@ -1,5 +1,6 @@
 ﻿using DevelopmentChallenge.Data.Infrastructure;
 using System;
+using System.Globalization;
 
 namespace DevelopmentChallenge.Data.Core
 {
@@ -7,12 +8,13 @@ namespace DevelopmentChallenge.Data.Core
   {
     public TrianguloEquilatero(decimal lado) : base(lado) { }
 
-    public override string Nombre(int idioma, int cantidad)
+    public override string Nombre(CultureInfo culture, int cantidad)
     {
-      return cantidad == 1 ? TraduccionesHelper.Traducciones[idioma]["Triángulo"] : TraduccionesHelper.Traducciones[idioma]["Triángulo"] + "s";
+      return ResourceHelper.ObtenerTextoPluralizado("Triángulo", culture.TwoLetterISOLanguageName, cantidad);
     }
 
     public override decimal CalcularArea() => ((decimal)Math.Sqrt(3) / 4) * _lado * _lado;
+
     public override decimal CalcularPerimetro() => _lado * 3;
   }
 }

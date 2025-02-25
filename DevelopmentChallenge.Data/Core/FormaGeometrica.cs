@@ -1,4 +1,5 @@
-﻿using DevelopmentChallenge.Data.Core.Interfaces;
+﻿using System.Globalization;
+using DevelopmentChallenge.Data.Core.Interfaces;
 
 namespace DevelopmentChallenge.Data.Core
 {
@@ -11,8 +12,11 @@ namespace DevelopmentChallenge.Data.Core
       _lado = lado;
     }
 
-    public abstract string Nombre(int idioma, int cantidad);
+    public abstract string Nombre(CultureInfo culture, int cantidad);
+
     public abstract decimal CalcularArea();
+
     public abstract decimal CalcularPerimetro();
+
   }
 }

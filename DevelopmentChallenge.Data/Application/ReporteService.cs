@@ -1,43 +1,49 @@
 ﻿using DevelopmentChallenge.Data.Core.Interfaces;
 using DevelopmentChallenge.Data.Infrastructure;
+using DevelopmentChallenge.Data.Infrastructure.Resources;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Text;
 
 namespace DevelopmentChallenge.Data.Application
 {
   public class ReporteService
   {
-    public static string Imprimir(List<IFormaGeometrica> formas, int idioma)
+    public static string Imprimir(List<IFormaGeometrica> formas, string idioma)
     {
       var sb = new StringBuilder();
+      var culture = new CultureInfo(idioma);
+
+      ResourceManager rm = new ResourceManager(typeof(Strings));
+
       if (!formas.Any())
       {
-        sb.Append($"<h1>{(idioma == 1 ? "Lista vacía de formas!" : idioma == 3 ? "Rapporto sulle Forme" : "Empty list of shapes!")}</h1>");
+        sb.Append($"<h1>{rm.GetString("Reporte", culture)}</h1>");
         return sb.ToString();
       }
 
-      sb.Append($"<h1>{TraduccionesHelper.Traducciones[idioma]["Reporte"]}</h1>");
+      sb.Append($"<h1>{rm.GetString("Reporte", culture)}</h1>");
 
       var resumen = formas.GroupBy(f => f.GetType().Name)
-                          .Select(g => new
-                          {
-                            Nombre = g.First().Nombre(idioma, g.Count()),
-                            Cantidad = g.Count(),
-                            Area = g.Sum(f => f.CalcularArea()),
-                            Perimetro = g.Sum(f => f.CalcularPerimetro())
-                          });
+          .Select(g => new
+          {
+            Nombre = g.First().Nombre(culture, g.Count()),  
+            Cantidad = g.Count(),
+            Area = g.Sum(f => f.CalcularArea()),
+            Perimetro = g.Sum(f => f.CalcularPerimetro())
+          });
 
       foreach (var item in resumen)
       {
-        sb.Append($"{item.Cantidad} {item.Nombre} | {TraduccionesHelper.Traducciones[idioma]["Área"]} {item.Area:#.##} | {TraduccionesHelper.Traducciones[idioma]["Perimetro"]} {item.Perimetro:#.##} <br/>");
+        sb.Append($"{item.Cantidad} {item.Nombre} | {rm.GetString("Área", culture)} {item.Area:#.##} | {rm.GetString("Perimetro", culture)} {item.Perimetro:#.##} <br/>");
       }
 
-      sb.Append($"{TraduccionesHelper.Traducciones[idioma]["Total"]}:<br/>");
-      string palabraFormas = idioma == 3 ? "forme" : (idioma == 1 ? "formas" : "shapes");
-      sb.Append($"{formas.Count} {palabraFormas} ");
-      sb.Append($"{TraduccionesHelper.Traducciones[idioma]["Perimetro"]} {formas.Sum(f => f.CalcularPerimetro()):#.##} ");
-      sb.Append($"{TraduccionesHelper.Traducciones[idioma]["Área"]} {formas.Sum(f => f.CalcularArea()):#.##}");
+      sb.Append($"{rm.GetString("Total", culture)}:<br/>");
+      sb.Append($"{formas.Count} {ResourceHelper.ObtenerTexto("Formas", culture.TwoLetterISOLanguageName)} ");
+      sb.Append($"{rm.GetString("Perimetro", culture)} {formas.Sum(f => f.CalcularPerimetro()):#.##} ");
+      sb.Append($"{rm.GetString("Área", culture)} {formas.Sum(f => f.CalcularArea()):#.##}");
 
       return sb.ToString();
     }
