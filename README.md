@@ -115,7 +115,7 @@ Se han implementado varios tests con **NUnit**:
 
 Este proyecto ofrece una solución extensible y mantenible para el cálculo de áreas y perímetros de formas geométricas, con soporte multilingüe y pruebas unitarias para garantizar su correcto funcionamiento.
 
-# 🎯 **✨ Mejoras clave:**
+### 🎯 **✨ Mejoras clave:**
 
 - Uso de **archivos de recursos (.resx)** para manejar idiomas.
 - Pluralización adecuada según idioma.
