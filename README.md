@@ -29,6 +29,7 @@ Contiene la lógica de negocio principal:
 ### **3️⃣ Infrastructure (Soporte y Utilidades)**
 
 - `TraduccionesHelper.cs` → Contiene diccionarios con traducciones en español, inglés e italiano.
+- `Strings.resx, Strings.en.resx, Strings.it.resx` → Archivos de recursos para traducciones en español, inglés e italiano.
 
 ### **4️⃣ Tests (Pruebas Unitarias)**
 
@@ -36,11 +37,23 @@ Contiene la lógica de negocio principal:
 
 ---
 
+## 🔹 **Manejo de Idiomas con Recursos (.resx)**
+
+El sistema de traducciones se ha mejorado utilizando archivos de recursos (.resx), en lugar de diccionarios estáticos.
+
+**Implementación:**
+
+1. Se han creado los archivos Strings.resx, Strings.en.resx, Strings.it.resx dentro de Infrastructure/Resources.
+2. ResourceHelper.cs permite obtener textos traducidos con ResourceManager.
+3. Se ha adaptado IFormaGeometrica para manejar pluralización correctamente.
+
+---
+
 ## 🔹 **Patrones de Diseño Implementados**
 
 - **Strategy Pattern**: `IFormaGeometrica` permite definir estrategias para el cálculo de área y perímetro.
 - **Factory Pattern**: `ReporteService` usa `IFormaGeometrica` sin conocer implementaciones específicas.
-- **Singleton Pattern**: `TraduccionesHelper` mantiene un único diccionario global de traducciones.
+- **Singleton Pattern**: `ResourceHelper` gestiona el acceso a recursos de traducción de manera centralizada.
 - **Open/Closed Principle (OCP - SOLID)**: Se pueden agregar nuevas formas geométricas sin modificar código existente.
 
 ---
@@ -50,7 +63,7 @@ Contiene la lógica de negocio principal:
 - **Abstracción**: `IFormaGeometrica` define métodos sin implementación concreta.
 - **Herencia**: `FormaGeometrica` es la base de `Cuadrado`, `Circulo`, `Trapecio`, `TrapecioRectangulo`, etc.
 - **Polimorfismo**: `ReporteService` opera con `IFormaGeometrica`, sin importar su tipo concreto.
-- **Encapsulamiento**: `TraduccionesHelper` protege los datos dentro de un diccionario estático.
+- **Encapsulamiento**: `ResourceHelper` protege el acceso a los recursos de traducción.
 
 ---
 
@@ -60,7 +73,7 @@ Se han implementado varios tests con **NUnit**:
 
 ### **✔️ Tests de Lista Vacía**
 
-- `TestResumenListaVacia()`: Verifica que se genere el mensaje correcto para una lista vacía.
+- `TestResumenListaVacia()`
 - `TestResumenListaVaciaFormasEnIngles()`
 - `TestResumenListaVaciaFormasEnItaliano()`
 
@@ -83,7 +96,7 @@ Se han implementado varios tests con **NUnit**:
 
 ### **✔️ Test para Trapecio Rectángulo**
 
-- `TestResumenListaConTrapecioRectangulo()`: Prueba que un **Trapecio Rectángulo** de bases 6 y 4, altura 3 y lado inclinado 5 genere el reporte correcto con área = 15 y perímetro = 18.
+- `TestResumenListaConTrapecioRectangulo()`
 
 ---
 
@@ -91,7 +104,7 @@ Se han implementado varios tests con **NUnit**:
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/DevelopmentChallenge.git
+   git clone https://github.com/tu-usuario/DevelopmentChallenge
    ```
 2. Abre el proyecto en **Visual Studio 2019+**.
 3. Compila y ejecuta los tests con **NUnit**.
@@ -102,9 +115,16 @@ Se han implementado varios tests con **NUnit**:
 
 Este proyecto ofrece una solución extensible y mantenible para el cálculo de áreas y perímetros de formas geométricas, con soporte multilingüe y pruebas unitarias para garantizar su correcto funcionamiento.
 
+# 🎯 **✨ Mejoras clave:**
+
+- Uso de **archivos de recursos (.resx)** para manejar idiomas.
+- Pluralización adecuada según idioma.
+- Estructura **más limpia y mantenible.**
+- Soporte para **nuevas formas sin modificar el código existente.**
+
 🚀 ¡Listo para ser extendido con nuevas formas y funcionalidades! 🔥
 
 ---
 
-## 📌 **Ry**
+# 📌 **Ry**
 
