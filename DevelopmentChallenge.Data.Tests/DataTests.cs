@@ -55,7 +55,7 @@ namespace DevelopmentChallenge.Data.Tests
       var formas = new List<IFormaGeometrica>
             {
                 new Cuadrado(5),
-                new Circulo(3),
+                new Circulo(2.03m),
                 new TrianguloEquilatero(4),
                 new Cuadrado(2),
                 new TrianguloEquilatero(9),
@@ -65,7 +65,7 @@ namespace DevelopmentChallenge.Data.Tests
 
       var resumen = ReporteService.Imprimir(formas, "en");
 
-      Assert.AreEqual($"<h1>{ResourceHelper.ObtenerTexto("Reporte", "en")}</h1>2 {ResourceHelper.ObtenerTexto("Cuadrado", "en")}s | {ResourceHelper.ObtenerTexto("Área", "en")} 29 | {ResourceHelper.ObtenerTexto("Perimetro", "en")} 28 <br/>2 {ResourceHelper.ObtenerTexto("Círculo", "en")}s | {ResourceHelper.ObtenerTexto("Área", "en")} 13.01 | {ResourceHelper.ObtenerTexto("Perimetro", "en")} 18.06 <br/>3 {ResourceHelper.ObtenerTexto("Triángulo", "en")}s | {ResourceHelper.ObtenerTexto("Área", "en")} 49.64 | {ResourceHelper.ObtenerTexto("Perimetro", "en")} 51.6 <br/>{ResourceHelper.ObtenerTexto("Total", "en")}:<br/>7 {ResourceHelper.ObtenerTexto("Formas", "en")} {ResourceHelper.ObtenerTexto("Perimetro", "en")} 97.66 {ResourceHelper.ObtenerTexto("Área", "en")} 91.65", resumen);
+      Assert.AreEqual($"<h1>{ResourceHelper.ObtenerTexto("Reporte", "en")}</h1>2 {ResourceHelper.ObtenerTexto("Cuadrado", "en")}s | {ResourceHelper.ObtenerTexto("Área", "en")} 29 | {ResourceHelper.ObtenerTexto("Perimetro", "en")} 28 <br/>2 {ResourceHelper.ObtenerTexto("Círculo", "en")}s | {ResourceHelper.ObtenerTexto("Área", "en")} 9.18 | {ResourceHelper.ObtenerTexto("Perimetro", "en")} 15.02 <br/>3 {ResourceHelper.ObtenerTexto("Triángulo", "en")}s | {ResourceHelper.ObtenerTexto("Área", "en")} 49.64 | {ResourceHelper.ObtenerTexto("Perimetro", "en")} 51.6 <br/>{ResourceHelper.ObtenerTexto("Total", "en")}:<br/>7 {ResourceHelper.ObtenerTexto("Formas", "en")} {ResourceHelper.ObtenerTexto("Perimetro", "en")} 94.62 {ResourceHelper.ObtenerTexto("Área", "en")} 87.82", resumen);
     }
 
     [TestCase]
@@ -74,7 +74,7 @@ namespace DevelopmentChallenge.Data.Tests
       var formas = new List<IFormaGeometrica>
             {
                 new Cuadrado(5),
-                new Circulo(3),
+                new Circulo(2.03m),
                 new TrianguloEquilatero(4),
                 new Cuadrado(2),
                 new TrianguloEquilatero(9),
@@ -84,7 +84,7 @@ namespace DevelopmentChallenge.Data.Tests
 
       var resumen = ReporteService.Imprimir(formas, "es");
 
-      Assert.AreEqual($"<h1>{ResourceHelper.ObtenerTexto("Reporte", "es")}</h1>2 {ResourceHelper.ObtenerTexto("Cuadrado", "es")}s | {ResourceHelper.ObtenerTexto("Área", "es")} 29 | {ResourceHelper.ObtenerTexto("Perimetro", "es")} 28 <br/>2 {ResourceHelper.ObtenerTexto("Círculo", "es")}s | {ResourceHelper.ObtenerTexto("Área", "es")} 13.01 | {ResourceHelper.ObtenerTexto("Perimetro", "es")} 18.06 <br/>3 {ResourceHelper.ObtenerTexto("Triángulo", "es")}s | {ResourceHelper.ObtenerTexto("Área", "es")} 49.64 | {ResourceHelper.ObtenerTexto("Perimetro", "es")} 51.6 <br/>{ResourceHelper.ObtenerTexto("Total", "es")}:<br/>7 {ResourceHelper.ObtenerTexto("Formas", "es")} {ResourceHelper.ObtenerTexto("Perimetro", "es")} 97.66 {ResourceHelper.ObtenerTexto("Área", "es")} 91.65", resumen);
+      Assert.AreEqual($"<h1>{ResourceHelper.ObtenerTexto("Reporte", "es")}</h1>2 {ResourceHelper.ObtenerTexto("Cuadrado", "es")}s | {ResourceHelper.ObtenerTexto("Área", "es")} 29 | {ResourceHelper.ObtenerTexto("Perimetro", "es")} 28 <br/>2 {ResourceHelper.ObtenerTexto("Círculo", "es")}s | {ResourceHelper.ObtenerTexto("Área", "es")} 9.18 | {ResourceHelper.ObtenerTexto("Perimetro", "es")} 15.02 <br/>3 {ResourceHelper.ObtenerTexto("Triángulo", "es")}s | {ResourceHelper.ObtenerTexto("Área", "es")} 49.64 | {ResourceHelper.ObtenerTexto("Perimetro", "es")} 51.6 <br/>{ResourceHelper.ObtenerTexto("Total", "es")}:<br/>7 {ResourceHelper.ObtenerTexto("Formas", "es")} {ResourceHelper.ObtenerTexto("Perimetro", "es")} 94.62 {ResourceHelper.ObtenerTexto("Área", "es")} 87.82", resumen);
     }
 
     [TestCase]

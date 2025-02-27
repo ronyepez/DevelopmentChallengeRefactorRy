@@ -12,9 +12,9 @@ namespace DevelopmentChallenge.Data.Core
     {
       return ResourceHelper.ObtenerTextoPluralizado("Círculo", culture.TwoLetterISOLanguageName, cantidad);
     }
-
     public override decimal CalcularArea() => (decimal)Math.PI * (_lado / 2) * (_lado / 2);
-
     public override decimal CalcularPerimetro() => (decimal)Math.PI * _lado;
+
+
   }
 }

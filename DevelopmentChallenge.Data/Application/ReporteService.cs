@@ -29,7 +29,7 @@ namespace DevelopmentChallenge.Data.Application
       var resumen = formas.GroupBy(f => f.GetType().Name)
           .Select(g => new
           {
-            Nombre = g.First().Nombre(culture, g.Count()),  
+            Nombre = g.First().Nombre(culture, g.Count()),
             Cantidad = g.Count(),
             Area = g.Sum(f => f.CalcularArea()),
             Perimetro = g.Sum(f => f.CalcularPerimetro())
@@ -37,15 +37,31 @@ namespace DevelopmentChallenge.Data.Application
 
       foreach (var item in resumen)
       {
-        sb.Append($"{item.Cantidad} {item.Nombre} | {rm.GetString("Área", culture)} {item.Area:#.##} | {rm.GetString("Perimetro", culture)} {item.Perimetro:#.##} <br/>");
+        sb.Append($"{item.Cantidad} {item.Nombre} | " +
+                  $"{rm.GetString("Área", culture)} {FormatearNumero(item.Area, culture)} | " +
+                  $"{rm.GetString("Perimetro", culture)} {FormatearNumero(item.Perimetro, culture)} <br/>");
       }
 
       sb.Append($"{rm.GetString("Total", culture)}:<br/>");
       sb.Append($"{formas.Count} {ResourceHelper.ObtenerTexto("Formas", culture.TwoLetterISOLanguageName)} ");
-      sb.Append($"{rm.GetString("Perimetro", culture)} {formas.Sum(f => f.CalcularPerimetro()):#.##} ");
-      sb.Append($"{rm.GetString("Área", culture)} {formas.Sum(f => f.CalcularArea()):#.##}");
+      sb.Append($"{rm.GetString("Perimetro", culture)} {FormatearNumero(formas.Sum(f => f.CalcularPerimetro()), culture)} ");
+      sb.Append($"{rm.GetString("Área", culture)} {FormatearNumero(formas.Sum(f => f.CalcularArea()), culture)}");
 
       return sb.ToString();
+    }
+
+    private static string FormatearNumero(decimal numero, CultureInfo culture)
+    {
+      string resultado = numero % 1 == 0
+          ? numero.ToString("0", culture)
+          : numero.ToString("0.##", culture);
+
+      if (culture.TwoLetterISOLanguageName == "es")
+      {
+        resultado = resultado.Replace(',', '.');
+      }
+
+      return resultado;
     }
   }
 }
