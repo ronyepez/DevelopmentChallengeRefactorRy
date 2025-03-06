@@ -56,11 +56,6 @@ namespace DevelopmentChallenge.Data.Application
           ? numero.ToString("0", culture)
           : numero.ToString("0.##", culture);
 
-      if (culture.TwoLetterISOLanguageName == "es")
-      {
-        resultado = resultado.Replace(',', '.');
-      }
-
       return resultado;
     }
   }
